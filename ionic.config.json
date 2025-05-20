@@ -1,0 +1,7 @@
+{
+  "name": "simple-notbloc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
