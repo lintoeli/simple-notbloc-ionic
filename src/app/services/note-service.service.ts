@@ -5,7 +5,7 @@ import { Note } from '../models/note';
 @Injectable({
   providedIn: 'root'
 })
-export class NoteServiceService {
+export class NoteService {
 
   notes = data_notes;
   constructor() { }
@@ -26,6 +26,13 @@ export class NoteServiceService {
     const index = this.notes.findIndex(note => note.id === id);
     if (index !== -1) {
       this.notes[index] = updatedNote;
+    }
+  }
+
+  deleteNote(id: number) {
+    const index = this.notes.findIndex(note => note.id === id);
+    if (index !== -1) {
+      this.notes.splice(index, 1);
     }
   }
 }
