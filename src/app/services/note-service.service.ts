@@ -7,32 +7,49 @@ import { Note } from '../models/note';
 })
 export class NoteService {
 
-  notes = data_notes;
+  // notes = data_notes;
   constructor() { }
 
-  getNotes() {
-    return this.notes;
+  getNotes(): Note[] {
+    return JSON.parse(localStorage.getItem('notes') || '[]');
   }
 
   getNoteById(id: number) {
-    return this.notes.find(note => note.id === id);
+    localStorage.getItem('notes');
+    const notes = this.getNotes();
+    return notes.find((note: Note) => note.id === id);
   }
 
   addNote(note: Note) {
-    this.notes.push(note);
+    var notes = this.getNotes();
+    var notes_updated = [...notes, note];
+    localStorage.setItem('notes', JSON.stringify(notes_updated));
   }
 
   updateNote(id: number, updatedNote: Note) {
-    const index = this.notes.findIndex(note => note.id === id);
+    var notes = this.getNotes();
+    const index = notes.findIndex(note => note.id === id);
     if (index !== -1) {
-      this.notes[index] = updatedNote;
+      notes[index] = updatedNote;
     }
+
+    localStorage.setItem('notes', JSON.stringify(notes));
   }
 
   deleteNote(id: number) {
-    const index = this.notes.findIndex(note => note.id === id);
+    var notes = this.getNotes();
+    const index = notes.findIndex(note => note.id === id);
     if (index !== -1) {
-      this.notes.splice(index, 1);
+      notes.splice(index, 1);
     }
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  getNewId(): number {
+    var notes = this.getNotes();
+    if (notes.length === 0) return 1;
+
+    return Math.max(...notes.map(note => note.id)) + 1;
   }
 }

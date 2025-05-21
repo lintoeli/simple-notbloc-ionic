@@ -1,21 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Notes
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="outline" color="primary" (click)="createNote()">
+        Create
+      </ion-button>
+      <ion-button fill="outline" color="danger" (click)="clearNotes()">
+        Clear notes
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  @if (notes.length === 0) {
+    <p>No notes created.</p>
+  } @else {
 
-  <ion-content>
     @for (item of notes; track $index) {
       <note-card [note]="item"></note-card>
     }
-  </ion-content>
+  }
 </ion-content>
+
