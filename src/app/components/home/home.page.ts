@@ -3,6 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 import { data_notes } from 'src/app/data/notes.data';
 import { Note } from 'src/app/models/note';
 import { NoteCardComponent } from '../note-card/note-card.component';
+import { NoteService } from 'src/app/services/note-service.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,12 @@ import { NoteCardComponent } from '../note-card/note-card.component';
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, NoteCardComponent],
 })
 export class HomePage {
+
   notes: Note[] = [];
-  constructor() {}
+
+  constructor(private noteService: NoteService) {}
 
   ngOnInit() {
-    this.notes = data_notes;
-      
+    this.notes = this.noteService.getNotes();
   }
 }

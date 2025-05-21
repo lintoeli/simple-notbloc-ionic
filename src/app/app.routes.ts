@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'note-view/:id',
+    loadComponent: () => import('./components/note-view/note-view.page').then( m => m.NoteViewPage)
+  },
 ];

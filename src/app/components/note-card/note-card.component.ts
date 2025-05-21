@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonCardSubtitle, IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonIcon, IonButton, IonImg } from "@ionic/angular/standalone";
 import { Note } from 'src/app/models/note';
 
@@ -6,13 +7,13 @@ import { Note } from 'src/app/models/note';
   selector: 'note-card',
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss'],
-  imports: [IonImg, IonButton, IonIcon, IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonCardSubtitle],
+  imports: [IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonCardSubtitle],
 })
 export class NoteCardComponent  implements OnInit {
 
   @Input() note?: Note;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
@@ -23,6 +24,10 @@ export class NoteCardComponent  implements OnInit {
       return content.substring(0, 50) + '...';
     }
     return content;
+  }
+
+  openNote(note: Note) {
+    this.router.navigate(['/note-view', note.id]);
   }
 
 }
