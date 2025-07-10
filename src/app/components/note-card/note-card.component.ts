@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonCardSubtitle, IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonIcon, IonButton, IonImg } from "@ionic/angular/standalone";
@@ -7,7 +8,7 @@ import { Note } from 'src/app/models/note';
   selector: 'note-card',
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss'],
-  imports: [IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonCardSubtitle],
+  imports: [IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonCardSubtitle, DatePipe],
 })
 export class NoteCardComponent  implements OnInit {
 
@@ -28,6 +29,10 @@ export class NoteCardComponent  implements OnInit {
 
   openNote(note: Note) {
     this.router.navigate(['/note-view', note.id]);
+  }
+
+  capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 }
